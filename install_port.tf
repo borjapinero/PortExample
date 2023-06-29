@@ -7,6 +7,11 @@ terraform {
   }
 }
 
+resource "port-labs_entity" "myEntity" {
+  identifier = "azure_example" # Entity identifier
+  title      = "Azure Example" # Entity title
+  blueprint  = "azureExample" # Identifier of the blueprint to create this entity from
+
 provider "azurerm" {
   features {}
 
