@@ -1,0 +1,74 @@
+name: CI
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        required: true
+        description: "Service name to deploy"
+        type: string
+      environment:  
+        required: true
+        default: staging
+        description: "Environment to deploy service to"
+        type: string
+      port_payload:
+        required: true
+        description: "Port's payload, including details for who triggered the action and general context (blueprint, run id, etc...)"
+        type: string
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: echo-deploy
+        run: echo "deploying azure infraestructure"
+        jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: terraform init
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: init
+          directory: .
+      - name: terraform validate
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: validate
+          directory: .
+      - name: terraform plan
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: plan
+          directory: .
+      - name: terraform apply
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: apply
+          directory: .
+        env:
+          TF_CLI_ARGS: "-input=false -auto-approve"
+
+  report-deployment:
+    name: Report new deployment Entity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract SHA short
+        run: echo "SHA_SHORT=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+      - name: "Report deployment Entity to port 🚢"
+        uses: port-labs/port-github-action@v1
+        with:
+          clientId: ${{ secrets.PORT_CLIENT_ID }}
+          clientSecret: ${{ secrets.PORT_CLIENT_SECRET }}
+          identifier: ${{ inputs.service }}-${{ inputs.environment }}-${{ env.SHA_SHORT }}
+          blueprint: deployment
+          properties: |
+            {
+               "jobUrl": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+               "deployingUser": "${{ github.actor }}",
+               "imageTag": "latest",
+               "commitSha": "${{ env.SHA_SHORT }}"
+            }
+          runId: "${{fromJson(inputs.port_payload).context.runId}}"
