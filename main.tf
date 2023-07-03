@@ -5,24 +5,16 @@ terraform {
       version = "~>2.0"
     }
   }
-}
-
-provider "azurerm" {
-  features {}
-
-  subscription_id   = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
-  tenant_id         = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
-  client_id         = "aa586f5a-a9b9-43cc-9255-9728dfccad47"
-  client_secret     = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
-}
-
-terraform{
   backend "azurerm" {
       resource_group_name  = "POCSignature-SEM-DEV"
       storage_account_name = "saport"
       container_name       = "tfstate"
       key                  = "terraform.tfstate"
   }
+}
+
+provider "azurerm" {
+  features {}
 }
 
 variable "azure_subscription_id" {
