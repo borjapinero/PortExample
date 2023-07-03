@@ -17,24 +17,12 @@ jobs:
         uses: robertdebock/terraform-action@1.1.4
         with:
           action: init
-          directory: ./delete
+          directory: .
       - name: terraform validate
         uses: robertdebock/terraform-action@1.1.4
         with:
           action: validate
-          directory: ./delete
+          directory: .
       - name: Import Resource Group
         run: |
-          terraform import azurerm_resource_group.example /subscriptions/7667bfd6-4676-4837-8d8c-f6f1bf9bc870/resourceGroups/POCSignature-SEM-DEV
-      - name: terraform plan
-        uses: robertdebock/terraform-action@1.1.4
-        with:
-          action: plan
-          directory: ./delete
-      - name: terraform apply
-        uses: robertdebock/terraform-action@1.1.4
-        with:
-          action: apply
-          directory: ./delete
-        env:
-          TF_CLI_ARGS: "-input=false -auto-approve"
+          terraform destroy
