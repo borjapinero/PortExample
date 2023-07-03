@@ -114,4 +114,13 @@ resource "azurerm_virtual_machine" "example" {
 
   os_profile {
     computer_name  = var.vm_name
-    admin_username
+    admin_username = var.admin_username
+    admin_password = var.admin_password
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+  tags = {
+    environment = "staging"
+  }
+}
