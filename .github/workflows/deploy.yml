@@ -18,6 +18,7 @@ jobs:
       - name: Terraform init
         uses: hashicorp/terraform-github-actions@v0.6.3
         with:
+          command: init
           tf_version: 0.14.9
           working_dir: .
 
