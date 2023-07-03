@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>2.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
 
@@ -7,15 +16,8 @@ provider "azurerm" {
   client_secret     = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
 }
 
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "~>2.0"
-    }
-  }
-
-backend "azurerm" {
+terraform{
+  backend "azurerm" {
       resource_group_name  = "POCSignature-SEM-DEV"
       storage_account_name = "saport"
       container_name       = "tfstate"
