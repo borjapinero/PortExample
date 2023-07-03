@@ -1,0 +1,40 @@
+name: CI
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: echo-deploy
+        run: echo "deploying azure infraestructure"
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: terraform init
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: init
+          directory: ./delete
+      - name: terraform validate
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: validate
+          directory: ./delete
+      - name: Import Resource Group
+        run: |
+          terraform import azurerm_resource_group.example /subscriptions/7667bfd6-4676-4837-8d8c-f6f1bf9bc870/resourceGroups/POCSignature-SEM-DEV
+      - name: terraform plan
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: plan
+          directory: ./delete
+      - name: terraform apply
+        uses: robertdebock/terraform-action@1.1.4
+        with:
+          action: apply
+          directory: ./delete
+        env:
+          TF_CLI_ARGS: "-input=false -auto-approve"
