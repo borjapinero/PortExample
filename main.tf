@@ -10,7 +10,7 @@ terraform {
 provider "azurerm" {
   features {}
 
-  subscription_id   = "4de03423-ed04-43b3-a68d-6d4f40c170d4"
+  subscription_id   = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
   tenant_id         = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
   client_id         = "59e11571-feaa-4193-a550-d36a70c9ad7a"
   client_secret     = "L2-8Q~51bJoRlKszPKllHsy67N-RWojcIfPeoclt"
@@ -18,7 +18,7 @@ provider "azurerm" {
 
 variable "azure_subscription_id" {
   description = "ID de la suscripción de Azure"
-  default = "4de03423-ed04-43b3-a68d-6d4f40c170d4"
+  default = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
 }
 
 variable "azure_client_id" {
@@ -38,7 +38,7 @@ variable "azure_tenant_id" {
 
 variable "resource_group_name" {
   description = "Nombre del grupo de recursos"
-  default     = "SEM-DEV-POCSignature"
+  default     = "POCSignature-SEM-DEV"
 }
 
 variable "location" {
