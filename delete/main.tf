@@ -32,6 +32,7 @@ resource "azurerm_resource_group" "example" {
 
 resource "azurerm_virtual_network" "example" {
   name                = "my-vnet"
+  address_space       = ["10.0.0.0/16"]
   resource_group_name = azurerm_resource_group.example.name
   location = var.location
 }
@@ -46,6 +47,7 @@ resource "azurerm_public_ip" "example" {
   name                = "my-public-ip"
   resource_group_name = azurerm_resource_group.example.name
   location = var.location
+  allocation_method   = "Dynamic"
 }
 
 resource "azurerm_network_interface" "example" {
