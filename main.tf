@@ -1,5 +1,19 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "~>2.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
+
+  subscription_id   = "4de03423-ed04-43b3-a68d-6d4f40c170d4"
+  tenant_id         = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
+  client_id         = "59e11571-feaa-4193-a550-d36a70c9ad7a"
+  client_secret     = "L2-8Q~51bJoRlKszPKllHsy67N-RWojcIfPeoclt"
 }
 
 variable "azure_subscription_id" {
