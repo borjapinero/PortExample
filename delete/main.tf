@@ -21,13 +21,19 @@ variable "resource_group_name" {
   default     = "POCSignature-SEM-DEV"
 }
 
+variable "location" {
+  description = "Ubicación de Azure"
+  default     = "westeurope"
+}
 resource "azurerm_resource_group" "example" {
   name     = var.resource_group_name
+  location = var.location
 }
 
 resource "azurerm_virtual_network" "example" {
   name                = "my-vnet"
   resource_group_name = azurerm_resource_group.example.name
+  location = var.location
 }
 
 resource "azurerm_subnet" "example" {
@@ -39,11 +45,13 @@ resource "azurerm_subnet" "example" {
 resource "azurerm_public_ip" "example" {
   name                = "my-public-ip"
   resource_group_name = azurerm_resource_group.example.name
+  location = var.location
 }
 
 resource "azurerm_network_interface" "example" {
   name                = "my-nic"
   resource_group_name = azurerm_resource_group.example.name
+  location = var.location
 
   ip_configuration {
     name                          = "my-nic-cfg"
