@@ -23,6 +23,9 @@ jobs:
         with:
           action: validate
           directory: .
+      - name: Import Resource Group
+        run: |
+          terraform import azurerm_resource_group.example /subscriptions/7667bfd6-4676-4837-8d8c-f6f1bf9bc870/resourceGroups/POCSignature-SEM-DEV
       - name: terraform plan
         uses: robertdebock/terraform-action@1.1.4
         with:
