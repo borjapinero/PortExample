@@ -12,8 +12,8 @@ provider "azurerm" {
 
   subscription_id   = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
   tenant_id         = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
-  client_id         = "59e11571-feaa-4193-a550-d36a70c9ad7a"
-  client_secret     = "L2-8Q~51bJoRlKszPKllHsy67N-RWojcIfPeoclt"
+  client_id         = "aa586f5a-a9b9-43cc-9255-9728dfccad47"
+  client_secret     = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
 }
 
 variable "azure_subscription_id" {
@@ -23,12 +23,12 @@ variable "azure_subscription_id" {
 
 variable "azure_client_id" {
   description = "ID del cliente de Azure"
-  default = "59e11571-feaa-4193-a550-d36a70c9ad7a"
+  default = "aa586f5a-a9b9-43cc-9255-9728dfccad47"
 }
 
 variable "azure_client_secret" {
   description = "Secreto del cliente de Azure"
-  default = "L2-8Q~51bJoRlKszPKllHsy67N-RWojcIfPeoclt"
+  default = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
 }
 
 variable "azure_tenant_id" {
