@@ -1,25 +1,20 @@
 terraform {
+backend "azurerm" {
+      resource_group_name  = "POCSignature-SEM-DEV"
+      storage_account_name = "saport"
+      container_name       = "tfstate"
+      key                  = "terraform.tfstate"
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~>3.0"
     }
   }
-  backend "azurerm" {
-      resource_group_name  = "POCSignature-SEM-DEV"
-      storage_account_name = "saport"
-      container_name       = "tfstate"
-      key                  = "terraform.tfstate"
-  }
 }
 
 provider "azurerm" {
   features {}
-
-  subscription_id = var.azure_subscription_id
-  client_id       = var.azure_client_id
-  client_secret   = var.azure_client_secret
-  tenant_id       = var.azure_tenant_id
 }
 
 variable "azure_subscription_id" {
