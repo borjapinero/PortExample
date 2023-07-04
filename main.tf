@@ -19,22 +19,22 @@ provider "azurerm" {
 
 variable "azure_subscription_id" {
   description = "ID de la suscripción de Azure"
-  default     = ${{ secrets.azure_subscription_id }}
+  default     = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 }
 
 variable "azure_client_id" {
   description = "ID del cliente de Azure"
-  default     = ${{ secrets.azure_client_id }}
+  default     = ${{ secrets.AZURE_CLIENT_ID }}
 }
 
 variable "azure_client_secret" {
   description = "Secreto del cliente de Azure"
-  default     = ${{ secrets.azure_client_secret }}
+  default     = ${{ secrets.AZURE_CLIENT_SECRET }}
 }
 
 variable "azure_tenant_id" {
   description = "ID del inquilino de Azure"
-  default     = ${{ secrets.azure_tenant_id }}
+  default     = ${{ secrets.AZURE_TENANT_ID }}
 }
 
 variable "resource_group_name" {
