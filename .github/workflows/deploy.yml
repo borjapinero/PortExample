@@ -16,6 +16,7 @@ jobs:
           export ARM_TENANT_ID="ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
           export ARM_CLIENT_ID="aa586f5a-a9b9-43cc-9255-9728dfccad47"
           export ARM_CLIENT_SECRET="AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
+          export ARM_ACCESS_KEY="2euLjvqP/RVCqUa19HFxO2nMqKjTJvsLLJPQlgc5uIthr8+eFSx17d1eD7ZWfbEIuAp//eoUkinc+ASt0DtwGA=="
       
       - name: Terraform init
         run: |
