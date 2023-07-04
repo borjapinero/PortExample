@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~>2.0"
     }
   }
@@ -15,26 +15,31 @@ terraform {
 
 provider "azurerm" {
   features {}
+
+  subscription_id = var.azure_subscription_id
+  client_id       = var.azure_client_id
+  client_secret   = var.azure_client_secret
+  tenant_id       = var.azure_tenant_id
 }
 
 variable "azure_subscription_id" {
   description = "ID de la suscripción de Azure"
-  default = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
+  default     = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
 }
 
 variable "azure_client_id" {
   description = "ID del cliente de Azure"
-  default = "aa586f5a-a9b9-43cc-9255-9728dfccad47"
+  default     = "aa586f5a-a9b9-43cc-9255-9728dfccad47"
 }
 
 variable "azure_client_secret" {
   description = "Secreto del cliente de Azure"
-  default = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
+  default     = "AT98Q~TtiLmv3SUGyR7bAEyL0AYQbBZGNixgucb~"
 }
 
 variable "azure_tenant_id" {
   description = "ID del inquilino de Azure"
-  default = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
+  default     = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
 }
 
 variable "resource_group_name" {
@@ -132,9 +137,11 @@ resource "azurerm_virtual_machine" "example" {
     admin_username = var.admin_username
     admin_password = var.admin_password
   }
+
   os_profile_linux_config {
     disable_password_authentication = false
   }
+
   tags = {
     environment = "staging"
   }
