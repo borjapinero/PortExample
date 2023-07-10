@@ -36,3 +36,7 @@ jobs:
       - name: Terraform apply
         run: |
           terraform apply -input=false -auto-approve
+          
+    permissions:
+     contents: 'read'
+     id-token: 'write'
