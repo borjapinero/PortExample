@@ -19,22 +19,22 @@ provider "azurerm" {
 
 variable "azure_subscription_id" {
   description = "ID de la suscripción de Azure"
-  default     = ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  default     = "7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
 }
 
 variable "azure_client_id" {
   description = "ID del cliente de Azure"
-  default     = ${{ secrets.AZURE_CLIENT_ID }}
+  default     = "2fff09bd-b095-47e5-af11-56113f31d7ca"
 }
 
 variable "azure_client_secret" {
   description = "Secreto del cliente de Azure"
-  default     = ${{ secrets.AZURE_CLIENT_SECRET }}
+  default     = "Zb28Q~79PIAVFrKJnIlzn3LVCCeE~T62FyG-3bVe"
 }
 
 variable "azure_tenant_id" {
   description = "ID del inquilino de Azure"
-  default     = ${{ secrets.AZURE_TENANT_ID }}
+  default     = "ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
 }
 
 variable "resource_group_name" {
