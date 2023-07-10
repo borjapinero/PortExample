@@ -15,8 +15,10 @@ jobs:
 
       - name: Set up Azure credentials
         run: echo 'export ARM_CLIENT_ID="${{ secrets.AZURE_CLIENT_ID }}"' >> $GITHUB_ENV
+      
       - name: Set up Azure credentials
         run: echo 'export ARM_CLIENT_SECRET="${{ secrets.AZURE_CLIENT_SECRET }}"' >> $GITHUB_ENV
+      
       - name: Set up Azure credentials
         run: echo 'export ARM_TENANT_ID="${{ secrets.AZURE_TENANT_ID }}"' >> $GITHUB_ENV
 
