@@ -21,10 +21,25 @@ jobs:
           storage_account_key="2euLjvqP/RVCqUa19HFxO2nMqKjTJvsLLJPQlgc5uIthr8+eFSx17d1eD7ZWfbEIuAp//eoUkinc+ASt0DtwGA=="
           connection_string="DefaultEndpointsProtocol=https;AccountName=$storage_account_name;AccountKey=$storage_account_key;EndpointSuffix=core.windows.net"
           
+      - name: Set up Azure credentials
+        run: echo '${{ secrets.AZURE_CREDENTIALS }}' > azure-credentials.json
+        
       - name: Download tfstate
-        run: az storage blob download --connection-string "$connection_string" --container-name tfstate --name terraform.tfstate --file /
+        run: |
+          export ARM_SUBSCRIPTION_ID="7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
+          export ARM_CLIENT_ID="2fff09bd-b095-47e5-af11-56113f31d7ca"
+          export ARM_CLIENT_SECRET="Zb28Q~79PIAVFrKJnIlzn3LVCCeE~T62FyG-3bVe"
+          export ARM_TENANT_ID="ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
+          az storage blob download --connection-string "$connection_string" --container-name tfstate --name terraform.tfstate --file terraform.tfstate
+        
+      - name: Set up Azure credentials
+        run: echo '${{ secrets.AZURE_CREDENTIALS }}' > azure-credentials.json
         
       - name: Destroy resources
         run: |
-          terraform destroy -state=/
+          export ARM_SUBSCRIPTION_ID="7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
+          export ARM_CLIENT_ID="2fff09bd-b095-47e5-af11-56113f31d7ca"
+          export ARM_CLIENT_SECRET="Zb28Q~79PIAVFrKJnIlzn3LVCCeE~T62FyG-3bVe"
+          export ARM_TENANT_ID="ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
+          terraform destroy -state=terraform.tfstate
 
