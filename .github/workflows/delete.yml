@@ -13,16 +13,17 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: terraform init
-        uses: robertdebock/terraform-action@1.1.4
-        with:
-          action: init
-          directory: .
-      - name: terraform validate
-        uses: robertdebock/terraform-action@1.1.4
-        with:
-          action: validate
-          directory: .
-      - name: Import Resource Group
+        
+      - name: Set up Azure credentials
+        run: echo '${{ secrets.AZURE_CREDENTIALS }}' > azure-credentials.json
+        
+      - name: Connection string
+        run:  export CONN_STRING=az storage account show-connection-string --name saport --resource-group POCSignature-SEM-DEV --query connectionString --output tsv
+
+      - name: Download tfstate
+        run: az storage blob download --connection-string $CONN_STRING --container-name tfstate --name terraform.tfstate --file /
+        
+      - name: Destroy resources
         run: |
-          terraform destroy
+          terraform destroy -state=/
+
