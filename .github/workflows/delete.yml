@@ -10,12 +10,14 @@ jobs:
         
       - name: Set up Azure credentials
         run: echo '${{ secrets.AZURE_CREDENTIALS }}' > azure-credentials.json
-      
-      - name: Login SP
-        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        
+             
       - name: Connection string
-        run: CONN_STRING=$(az storage account show-connection-string --name saport --resource-group POCSignature-SEM-DEV --query connectionString --output tsv)
+        run: |
+          export ARM_SUBSCRIPTION_ID="7667bfd6-4676-4837-8d8c-f6f1bf9bc870"
+          export ARM_CLIENT_ID="2fff09bd-b095-47e5-af11-56113f31d7ca"
+          export ARM_CLIENT_SECRET="Zb28Q~79PIAVFrKJnIlzn3LVCCeE~T62FyG-3bVe"
+          export ARM_TENANT_ID="ba351225-3ca4-45f4-b7cc-ff5556c74a3e"
+          CONN_STRING=$(az storage account show-connection-string --name saport --resource-group POCSignature-SEM-DEV --query connectionString --output tsv)
 
       - name: Download tfstate
         run: az storage blob download --connection-string "$CONN_STRING" --container-name tfstate --name terraform.tfstate --file /
