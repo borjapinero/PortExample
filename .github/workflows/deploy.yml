@@ -24,6 +24,9 @@ jobs:
       - name: Terraform validate
         run: |
           terraform validate
+      
+      - name: Azure CLI login
+        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Terraform import Resource Group
         run: |
