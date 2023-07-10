@@ -10,6 +10,9 @@ jobs:
         
       - name: Set up Azure credentials
         run: echo '${{ secrets.AZURE_CREDENTIALS }}' > azure-credentials.json
+      
+      - name: Login SP
+        run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
         
       - name: Connection string
         run: CONN_STRING=$(az storage account show-connection-string --name saport --resource-group POCSignature-SEM-DEV --query connectionString --output tsv)
