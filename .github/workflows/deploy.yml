@@ -37,7 +37,7 @@ jobs:
       
       - name: Terraform import Resource Group
         run: |
-          terraform -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "tenant_id=$ARM_TENANT_ID" import azurerm_resource_group.example /subscriptions/7667bfd6-4676-4837-8d8c-f6f1bf9bc870/resourceGroups/POCSignature-SEM-DEV
+          terraform import -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "tenant_id=$ARM_TENANT_ID" azurerm_resource_group.example /subscriptions/7667bfd6-4676-4837-8d8c-f6f1bf9bc870/resourceGroups/POCSignature-SEM-DEV
           
       - name: Terraform plan
         run: |
