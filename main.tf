@@ -67,36 +67,31 @@ variable "admin_password" {
   default     = "P@ssw0rd123!"
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = var.resource_group_name
-  location = var.location
-}
-
 resource "azurerm_virtual_network" "example" {
   name                = "my-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
 }
 
 resource "azurerm_subnet" "example" {
   name                 = "my-subnet"
-  resource_group_name  = azurerm_resource_group.example.name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_public_ip" "example" {
   name                = "my-public-ip"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
   allocation_method   = "Dynamic"
 }
 
 resource "azurerm_network_interface" "example" {
   name                = "my-nic"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
 
   ip_configuration {
     name                          = "my-nic-cfg"
@@ -108,8 +103,8 @@ resource "azurerm_network_interface" "example" {
 
 resource "azurerm_virtual_machine" "example" {
   name                  = var.vm_name
-  location              = azurerm_resource_group.example.location
-  resource_group_name   = azurerm_resource_group.example.name
+  location              = var.location
+  resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.example.id]
   vm_size               = var.vm_size
 
