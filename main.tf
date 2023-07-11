@@ -1,6 +1,6 @@
 terraform {
       backend "azurerm" {
-            resource_group_name  = "SEM-DEV-POCSignature"
+            resource_group_name  = "Port"
             storage_account_name = "saport"
             container_name       = "tfstate"
             key                  = "terraform.tfstate"
@@ -39,7 +39,7 @@ variable "azure_tenant_id" {
 
 variable "resource_group_name" {
   description = "Nombre del grupo de recursos"
-  default     = "SEM-DEV-POCSignature"
+  default     = "Port"
 }
 
 variable "location" {
